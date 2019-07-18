@@ -21,7 +21,7 @@ public class QPDriver {
            queuePublishers[i] = new QueuePublisher(sqsQueues[i]);
         }
 
-        // user must either ctrl
+        // user must either ctrl c or stop IDE
         while(true) {
             queuePublishers[0].publishToQueue();
             queuePublishers[1].publishToQueue();
