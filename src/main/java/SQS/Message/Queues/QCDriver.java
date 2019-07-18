@@ -12,16 +12,12 @@ public class QCDriver {
         String queueName = scanner.nextLine();
         QueueClient qc = new QueueClient(queueName);
 
-        Scanner in = new Scanner(System.in);
-        String userInput;
-        while(in.nextLine() != "q") {
+        while(true) {
             qc.retrieveFromQueue();
-            userInput = in.nextLine();
+
             for(Message msg: qc.getMessages()) {
                 System.out.println(msg.getBody());
             }
         }
-
-        return;
     }
 }
