@@ -20,7 +20,16 @@ public class QueueClient {
         this.queueURL = this.sqs.getQueueUrl(this.queueName).getQueueUrl();
     }
 
-    public void retrieveFromQueue() {
-        messages = sqs.receiveMessage(this.queueURL).getMessages();
+    public List<Message> retrieveFromQueue() {
+        this.messages = sqs.receiveMessage(this.queueURL).getMessages();
+        for (Message m : messages) {
+            sqs.deleteMessage(this.queueURL, m.getReceiptHandle());
+        }
+
+        return this.messages;
+    }
+
+    public List<Message> getMessages() {
+        return this.messages;
     }
 }
